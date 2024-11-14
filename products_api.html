@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCTS API TASK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <center><h1 class="p-5 fw-bolder">PRODUCTS API</h1></center>
+
+
+    <div id="result" class="container rounded shadow d-flex flex-wrap mb-5"   style="background-color: lavender; height: 100%; ">
+
+
+
+    </div>
+
+    
+
+    <script>
+
+
+        const getData=new XMLHttpRequest();
+
+        getData.open('get','https://dummyjson.com/products')
+
+        getData.send();
+
+        getData.onreadystatechange=()=>{
+            if(getData.readyState==4){
+                if(getData.status==200){
+               console.log(getData.responseText);
+            const arrayData=JSON.parse(getData.responseText);
+            console.log(arrayData);
+             displayData(arrayData)
+                        
+
+                }
+                else{
+                    alert("error")
+                }
+            }
+        }
+
+
+
+
+        function displayData(arrayData){
+            for(let i of arrayData.products){
+
+                let htmlData=`
+                <div class="card m-3 mt-5" style="width: 18rem;">
+  <img src="${i.thumbnail}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${i.title}</h5>
+    <p class="card-text">${i.description}</p>
+    <p class="card-text">${i.price}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+                `
+                result.innerHTML+=htmlData
+
+            }
+
+        }
+
+
+
+    </script>
+</body>
+</html>
